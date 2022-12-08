@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace ArtKit.Resolutions
+namespace AAA.Editor.Editor.Resolutions
 {
     public static class GameResolutionUtility
     {

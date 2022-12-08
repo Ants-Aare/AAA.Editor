@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
-using ArtKit.Resolutions;
 using UnityEditor;
 
-namespace Plugins.AAA.Editor.Editor.Resolutions
+namespace AAA.Editor.Editor.Resolutions
 {
     public static class GameViewUtils
     {

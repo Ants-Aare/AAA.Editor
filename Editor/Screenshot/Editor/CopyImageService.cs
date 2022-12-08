@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Diagnostics;
 using System.IO;
+using Debug = UnityEngine.Debug;
 
 public static class CopyImageService
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ArtKit.Resolutions
+namespace AAA.Editor.Editor.Resolutions
 {
     [CreateAssetMenu(menuName = "ArtKit/Screenshot Resolution Data", fileName = "ScreenshotResolutionData", order = 0)]
     public class GameResolutionInfo : ScriptableObject

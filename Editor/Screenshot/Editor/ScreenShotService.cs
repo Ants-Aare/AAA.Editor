@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using ArtKit.Resolutions;
-using Plugins.AAA.Editor.Editor.Resolutions;
+using AAA.Editor.Editor.Resolutions;
 using UnityEditor;
 using UnityEngine;
 using static System.Environment;
 
-namespace Plugins.AAA.Editor.Editor.Screenshot.Editor
+namespace AAA.Editor.Editor.Screenshot.Editor
 {
     public static class ScreenShotService
     {

@@ -2,7 +2,7 @@ using Plugins.AAA.Editor.Editor.Toolbar;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.Screenshot.Editor
+namespace AAA.Editor.Editor.Screenshot.Editor
 {
     public class ToolbarScreenShotButton : IToolbarContentGuiRight
     {

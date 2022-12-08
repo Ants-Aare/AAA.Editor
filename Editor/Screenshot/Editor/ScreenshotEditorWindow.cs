@@ -1,13 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
-using ArtKit.Resolutions;
-using ArtKit.Resolutions.Editor;
+using AAA.Editor.Editor.Resolutions;
 using Plugins.AAA.Editor.Editor.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.Screenshot.Editor
+namespace AAA.Editor.Editor.Screenshot.Editor
 {
     public class ScreenshotEditorWindow : EditorWindow
     {

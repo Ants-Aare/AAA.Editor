@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEditor;
 
-namespace ArtKit.Resolutions.Editor
+namespace AAA.Editor.Editor.Resolutions
 {
     public static class GameResolutionEditorService
     {
