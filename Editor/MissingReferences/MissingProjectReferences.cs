@@ -267,14 +267,14 @@ namespace Plugins.AAA.Editor.Editor.MissingReferences
 
         bool _searchAssetsInBuildOnly = true;
 
-        static readonly string SearchAssetsInBuildOnlyPref = "GameKit.MissingProjectReferences.SearchAssetsInBuildOnly";
+        static readonly string SearchAssetsInBuildOnlyPref = "AAA.MissingProjectReferences.SearchAssetsInBuildOnly";
 
         Vector2 m_ScrollPosition;
         readonly Folder m_ParentFolder = new Folder();
 
         ILookup<string, MissingReferencesContainer> m_AllMissingReferences;
 
-        [MenuItem("GameKit/Missing Project References")]
+        [MenuItem("AAA/Missing Project References")]
         static void OnMenuItem()
         {
             var window = GetWindow<MissingProjectReferences>("Missing Project References");

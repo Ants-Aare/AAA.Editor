@@ -16,7 +16,7 @@ namespace UnityEditor
     {
         ScrollView _results;
 
-        [MenuItem("GameKit/Check Texture PoT")]
+        [MenuItem("AAA/Check Texture PoT")]
         static void Init()
         {
             var window = (CheckPoTTexture)GetWindow(typeof(CheckPoTTexture));

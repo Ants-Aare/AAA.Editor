@@ -25,7 +25,7 @@ namespace Plugins.AAA.Editor.Editor.Screenshot.Editor
         // Button to open screenshot folder 👍
         // copy result to clipboard👍
 
-        [MenuItem("GameKit/Screenshot/Window")]
+        [MenuItem("AAA/Screenshot/Window")]
         static void Init()
         {
             // Get existing open window or if none, make a new one:

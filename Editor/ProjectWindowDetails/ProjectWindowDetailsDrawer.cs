@@ -135,7 +135,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
             menu.AddSeparator("");
             menu.AddItem(new GUIContent("Deselect All"), false, HideAllDetails);
             menu.AddItem(new GUIContent("Disable"), false, ToggleProjectWindowDetails);
-            menu.AddItem(new GUIContent("Help"), false, () => Application.OpenURL("https://popcore.atlassian.net/l/cp/1fq4CzcX"));
+            // menu.AddItem(new GUIContent("Help"), false, () => Application.OpenURL(""));
             menu.DropDown(rect);
         }
 

@@ -3,7 +3,7 @@ using System.Reflection;
 using ArtKit.Resolutions;
 using UnityEditor;
 
-namespace Popcore.ArtTools.Screenshot
+namespace Plugins.AAA.Editor.Editor.Resolutions
 {
     public static class GameViewUtils
     {

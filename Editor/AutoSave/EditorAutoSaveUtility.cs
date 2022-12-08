@@ -5,8 +5,8 @@ namespace AAA.Editor
     [InitializeOnLoad]
     public class EditorAutoSaveUtility
     {
-        const string PrefsKey = "GameKit.AutoSaveAssets";
-        const string MenuItem = "GameKit/Utils/Auto Save Assets";
+        const string PrefsKey = "AAA.AutoSaveAssets";
+        const string MenuItem = "AAA/Utils/Auto Save Assets";
 
         static bool AutoSaveEnabled
         {

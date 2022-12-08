@@ -21,7 +21,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowItems
             EditorApplication.projectWindowItemOnGUI += ReplaceFolderIcon;
         }
 
-        [MenuItem("GameKit/Editor/Toggle Folder Icons")]
+        [MenuItem("AAA/Editor/Toggle Folder Icons")]
         public static void ToggleFolderIcons()
             => EditorPrefs.SetBool(DrawFolderIconsKey, !EditorPrefs.GetBool(DrawFolderIconsKey, true));
         static void ReplaceFolderIcon(string guid, Rect rect)

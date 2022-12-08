@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using ArtKit.Resolutions;
-using Popcore.ArtTools.Screenshot;
+using Plugins.AAA.Editor.Editor.Resolutions;
 using UnityEditor;
 using UnityEngine;
 using static System.Environment;
