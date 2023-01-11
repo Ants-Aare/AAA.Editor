@@ -33,7 +33,7 @@ namespace Unity.Labs.SuperScience
 
         ILookup<int, GameObjectContainer> m_AllMissingReferences;
 
-        [MenuItem("AAA/Missing Scene References")]
+        [MenuItem("AAA/Find/Missing Scene References", false, 2)]
         static void OnMenuItem() { GetWindow<MissingSceneReferences>("Missing Scene References"); }
 
         /// <summary>

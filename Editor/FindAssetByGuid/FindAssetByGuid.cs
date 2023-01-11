@@ -8,7 +8,7 @@ namespace UnityEditor
     /// </summary>
     public class FindAssetByGuid : EditorWindow
     {
-        [MenuItem("AAA/Find Asset by GUID")]
+        [MenuItem("AAA/Find/Asset by GUID", false, 4)]
         static void Init()
         {
             FindAssetByGuid window = (FindAssetByGuid)GetWindow(typeof(FindAssetByGuid));

@@ -16,7 +16,7 @@ namespace UnityEditor
     {
         ScrollView _results;
 
-        [MenuItem("AAA/Check Texture PoT")]
+        [MenuItem("AAA/Find/Texture not power of two", false, 3)]
         static void Init()
         {
             var window = (CheckPoTTexture)GetWindow(typeof(CheckPoTTexture));
@@ -55,23 +55,41 @@ namespace UnityEditor
 
             var problemSprites = sprites.Where(sprite => IsSpriteProblematic(sprite, atlantes)).ToList();
 
+            problemSprites.Sort((x, y)=>IsDemoOrExample(x).CompareTo(IsDemoOrExample(y)));
+            
             foreach (var sprite in problemSprites)
             {
-                _results.Add(new Button(() => { Selection.activeObject = sprite; })
-                {
-                    text = sprite.name
-                });
+                var buttonVisualElement = new Button(() => { Selection.activeObject = sprite; });
+                
+                var isDemoOrExample = IsDemoOrExample(sprite);
+                if (!isDemoOrExample)
+                    buttonVisualElement.style.backgroundColor = new StyleColor(Color.grey);
+
+                buttonVisualElement.text = sprite.name;
+                buttonVisualElement.tooltip = isDemoOrExample
+                    ? "This is just a Texture that is being used in a Demo Scene. Feel free to ignore."
+                    : "Select Sprite";
+
+                _results.Add(buttonVisualElement);
             }
         }
 
         // Problematic means sprite is not a PoT and not in any of these atlantes.
-        static bool IsSpriteProblematic(Sprite sprite, IEnumerable<SpriteAtlas> atlantes) => !IsPowerOfTwoSprite(sprite) && !IsInsideAnyAtlas(sprite, atlantes);
+        static bool IsSpriteProblematic(Sprite sprite, IEnumerable<SpriteAtlas> atlantes) =>
+            !IsPowerOfTwoSprite(sprite) && !IsInsideAnyAtlas(sprite, atlantes);
 
-        static bool IsInsideAnyAtlas(Sprite sprite, IEnumerable<SpriteAtlas> atlantes) => atlantes.Any(atlas => atlas.CanBindTo(sprite));
+        private static bool IsDemoOrExample(Sprite sprite)
+        {
+            var assetPath = AssetDatabase.GetAssetPath(sprite);
+            return assetPath.Contains("/Examples/") || assetPath.Contains("/Demo/");
+        }
 
-        static bool IsPowerOfTwoSprite(Sprite sprite) => IsPowerOfTwo((ulong)sprite.rect.width) && IsPowerOfTwo((ulong)sprite.rect.height);
+        static bool IsInsideAnyAtlas(Sprite sprite, IEnumerable<SpriteAtlas> atlantes) =>
+            atlantes.Any(atlas => atlas.CanBindTo(sprite));
+
+        static bool IsPowerOfTwoSprite(Sprite sprite) =>
+            IsPowerOfTwo((ulong)sprite.rect.width) && IsPowerOfTwo((ulong)sprite.rect.height);
 
         static bool IsPowerOfTwo(ulong x) => (x != 0) && ((x & (x - 1)) == 0);
-
     }
 }

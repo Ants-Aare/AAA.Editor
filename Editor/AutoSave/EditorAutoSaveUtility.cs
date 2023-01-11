@@ -6,7 +6,7 @@ namespace AAA.Editor
     public class EditorAutoSaveUtility
     {
         const string PrefsKey = "AAA.AutoSaveAssets";
-        const string MenuItem = "AAA/Utils/Auto Save Assets";
+        const string MenuItem = "AAA/Editor/Auto Save Assets";
 
         static bool AutoSaveEnabled
         {

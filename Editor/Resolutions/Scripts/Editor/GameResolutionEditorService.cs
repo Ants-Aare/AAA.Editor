@@ -11,7 +11,7 @@ namespace AAA.Editor.Editor.Resolutions
             var splitList = gameResolutionInfos.GroupBy(x => x.Platform);
             var labelWidth = EditorGUIUtility.labelWidth;
 
-            EditorGUILayout.LabelField("Select Resolutions:");
+            EditorGUILayout.LabelField("Resolutions:");
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUI.indentLevel++;
 

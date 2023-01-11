@@ -274,7 +274,7 @@ namespace Plugins.AAA.Editor.Editor.MissingReferences
 
         ILookup<string, MissingReferencesContainer> m_AllMissingReferences;
 
-        [MenuItem("AAA/Missing Project References")]
+        [MenuItem("AAA/Find/Missing Project References", false, 1)]
         static void OnMenuItem()
         {
             var window = GetWindow<MissingProjectReferences>("Missing Project References");

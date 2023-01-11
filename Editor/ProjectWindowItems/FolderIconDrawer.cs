@@ -9,21 +9,46 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowItems
     public class FolderIconDrawer
     {
         const string DrawFolderIconsKey = "DrawFolderIcons";
+        const string MenuItem = "AAA/Editor/Folder Icons";
+
         static readonly IFolderIconProvider[] ProjectWindowItems =
         {
             new UnityFolderIconProvider(),
             new DefaultFolderIconProvider(),
         };
 
-        static FolderIconDrawer()
+        static bool DrawFoldersEnabled
         {
-            EditorApplication.projectWindowItemOnGUI -= ReplaceFolderIcon;
-            EditorApplication.projectWindowItemOnGUI += ReplaceFolderIcon;
+            get => EditorPrefs.GetBool(DrawFolderIconsKey, true);
+            set => EditorPrefs.SetBool(DrawFolderIconsKey, value);
         }
 
-        [MenuItem("AAA/Editor/Toggle Folder Icons")]
+        static FolderIconDrawer()
+        {
+            var enabled = DrawFoldersEnabled;
+            Menu.SetChecked(MenuItem, enabled);
+
+            if (enabled)
+            {
+                EditorApplication.projectWindowItemOnGUI -= ReplaceFolderIcon;
+                EditorApplication.projectWindowItemOnGUI += ReplaceFolderIcon;
+            }
+        }
+
+        [MenuItem(MenuItem)]
         public static void ToggleFolderIcons()
-            => EditorPrefs.SetBool(DrawFolderIconsKey, !EditorPrefs.GetBool(DrawFolderIconsKey, true));
+        {
+            var enabled = !DrawFoldersEnabled;
+            DrawFoldersEnabled = enabled;
+            Menu.SetChecked(MenuItem, enabled);
+
+            EditorApplication.projectWindowItemOnGUI -= ReplaceFolderIcon;
+            if (enabled)
+            {
+                EditorApplication.projectWindowItemOnGUI += ReplaceFolderIcon;
+            }
+        }
+
         static void ReplaceFolderIcon(string guid, Rect rect)
         {
             if (!EditorPrefs.GetBool(DrawFolderIconsKey, true)) return;
@@ -38,6 +63,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowItems
                 if (folderIcon != null)
                     break;
             }
+
             if (folderIcon == null) return;
 
             if (rect.width > rect.height)

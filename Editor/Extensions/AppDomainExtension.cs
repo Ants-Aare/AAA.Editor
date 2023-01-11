@@ -29,6 +29,14 @@ namespace Plugins.AAA.Editor.Editor.Extensions
             return (IEnumerable<Type>)allTypes;
         }
 
+        public static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type baseClassType)
+        {
+            var assemblies = appDomain.GetAssemblies();
+
+            return assemblies.SelectMany(assembly => assembly.GetTypes())
+                .Where(t => t.IsSubclassOf(baseClassType));
+        }
+
         public static IEnumerable<Type> GetNonAbstractTypes<T>(this AppDomain appDomain) =>
             appDomain.GetAllTypes().GetNonAbstractTypes<T>();
 

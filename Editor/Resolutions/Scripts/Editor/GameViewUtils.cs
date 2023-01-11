@@ -8,6 +8,12 @@ namespace AAA.Editor.Editor.Resolutions
     {
         static object gameViewSizesInstance;
         static MethodInfo getGroup;
+        static readonly Type GameViewWindowType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameView");
+
+        static readonly PropertyInfo SelectedSizeIndexProperty = GameViewWindowType.GetProperty("selectedSizeIndex",
+                BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.NonPublic);
 
         static GameViewUtils()
         {
@@ -27,20 +33,14 @@ namespace AAA.Editor.Editor.Resolutions
 
         public static int GetSelectedIndex()
         {
-            var gvWndType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameView");
-            var selectedSizeIndexProp = gvWndType.GetProperty("selectedSizeIndex",
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            var gvWnd = EditorWindow.GetWindow(gvWndType);
-            return (int)selectedSizeIndexProp.GetValue(gvWnd);
+            var gameViewWindow = EditorWindow.GetWindow(GameViewWindowType);
+            return (int)SelectedSizeIndexProperty.GetValue(gameViewWindow);
         }
 
         public static void SetSize(int index)
         {
-            var gvWndType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameView");
-            var selectedSizeIndexProp = gvWndType.GetProperty("selectedSizeIndex",
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            var gvWnd = EditorWindow.GetWindow(gvWndType);
-            selectedSizeIndexProp.SetValue(gvWnd, index, null);
+            var gvWnd = EditorWindow.GetWindow(GameViewWindowType);
+            SelectedSizeIndexProperty.SetValue(gvWnd, index, null);
         }
 
         public static void AddCustomSize(GameViewSizeType viewSizeType, GameViewSizeGroupType sizeGroupType, int width, int height, string text)
@@ -49,12 +49,12 @@ namespace AAA.Editor.Editor.Resolutions
             // group.AddCustomSize(new GameViewSize(viewSizeType, width, height, text);
 
             var group = GetGroup(sizeGroupType);
-            var addCustomSize = getGroup.ReturnType.GetMethod("AddCustomSize"); // or group.GetType().
-            var gvsType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameViewSize");
-            var gvstType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameViewSizeType");
-            var ctor = gvsType.GetConstructor(new Type[] {gvstType, typeof(int), typeof(int), typeof(string)});
-            var newSize = ctor.Invoke(new object[] {(int)viewSizeType, width, height, text});
-            addCustomSize.Invoke(group, new object[] {newSize});
+            var addCustomSizeMethod = getGroup.ReturnType.GetMethod("AddCustomSize"); // or group.GetType().
+            var gameViewSize = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameViewSize");
+            var gameViewSizeType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameViewSizeType");
+            var ctor = gameViewSize.GetConstructor(new Type[] { gameViewSizeType, typeof(int), typeof(int), typeof(string) });
+            var newSize = ctor.Invoke(new object[] { (int)viewSizeType, width, height, text });
+            addCustomSizeMethod.Invoke(group, new object[] { newSize });
         }
 
         public static void SetOrAddSize(string text, int width, int height)
@@ -70,10 +70,18 @@ namespace AAA.Editor.Editor.Resolutions
 
             SetSize(idx);
         }
+
         public static void SetOrAddSize(GameResolutionInfo gameResolutionInfo)
         {
             var sizeName = $"{gameResolutionInfo.Resolution.x}x{gameResolutionInfo.Resolution.y} {gameResolutionInfo.name}";
             SetOrAddSize(sizeName, gameResolutionInfo.Resolution.x, gameResolutionInfo.Resolution.y);
+        }
+
+        public static void RemoveSize(int index)
+        {
+            var group = GetGroup(GetCurrentGroupType());
+            var removeCustomSizeMethod = getGroup.ReturnType.GetMethod("RemoveCustomSize");
+            removeCustomSizeMethod.Invoke(group, new object[] { index });
         }
 
         public static bool SizeExists(GameViewSizeGroupType sizeGroupType, string text)
@@ -144,7 +152,7 @@ namespace AAA.Editor.Editor.Resolutions
 
         static object GetGroup(GameViewSizeGroupType type)
         {
-            return getGroup.Invoke(gameViewSizesInstance, new object[] {(int)type});
+            return getGroup.Invoke(gameViewSizesInstance, new object[] { (int)type });
         }
 
         public static GameViewSizeGroupType GetCurrentGroupType()

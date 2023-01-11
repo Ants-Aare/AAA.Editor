@@ -3,33 +3,37 @@ using System.Diagnostics;
 using System.IO;
 using Debug = UnityEngine.Debug;
 
-public static class CopyImageService
+namespace AAA.Editor.Editor.Screenshot
 {
-    public static void CopyToClipboard(Texture2D texture)
+    public static class CopyImageService
     {
-#if UNITY_EDITOR_OSX
-        var path = $"{Application.dataPath}/../Library/Clipboard.jpg";
-        File.WriteAllBytes(path, texture.EncodeToJPG());
-
-        var startInfo = new ProcessStartInfo
+        public static void CopyToClipboard(Texture2D texture)
         {
-            FileName = "osascript",
-            UseShellExecute = false,
-            RedirectStandardError = true,
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true,
-            Arguments = $" -e 'set the clipboard to (read (POSIX file \"{path}\") as JPEG picture)'"
-        };
+#if UNITY_EDITOR_OSX
+            var path = $"{Application.dataPath}/../Library/Clipboard.jpg";
+            var encodedResult = texture.EncodeToJPG();
+            File.WriteAllBytes(path, encodedResult);
 
-        var myProcess = new Process { StartInfo = startInfo };
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "osascript",
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+                Arguments = $" -e 'set the clipboard to (read (POSIX file \"{path}\") as JPEG picture)'"
+            };
 
-        myProcess.Start();
-        myProcess.WaitForExit();
+            var myProcess = new Process { StartInfo = startInfo };
 
-        File.Delete(path);
+            myProcess.Start();
+            myProcess.WaitForExit();
+
+            File.Delete(path);
 #else
-        Debug.LogError("Copying Images to Clipboard is not implemented for this Operating system");
+            Debug.LogError("Copying Images to Clipboard is not implemented for this Operating system");
 #endif
+        }
     }
 }

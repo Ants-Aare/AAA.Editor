@@ -14,7 +14,7 @@ namespace Plugins.AAA.Editor.Editor.Toolbar
 
         public void Initialize()
         {
-            var icon = EditorGUIUtility.IconContent(@"Refresh").image;
+            var icon = EditorGUIUtility.IconContent("TreeEditor.Trash").image;
             _resetUserDataContent = new GUIContent(null, icon, "Reset User Data");
         }
 

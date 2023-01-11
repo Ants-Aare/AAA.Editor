@@ -12,6 +12,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
     public static class ProjectWindowDetailsDrawer
     {
         const string DrawProjectWindowDetailsKey = "DrawProjectWindowDetails";
+        const string MenuItem = "AAA/Editor/Project Window Details";
         const int SpaceBetweenColumns = 10;
         const int MenuIconWidth = 20;
 
@@ -23,26 +24,34 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
             .Select(type => (ProjectWindowDetailBase)Activator.CreateInstance(type))
             .ToList();
 
-        [MenuItem("AAA/Editor/Toggle Asset Details")]
+        static bool DrawDetailsEnabled
+        {
+            get => EditorPrefs.GetBool(DrawProjectWindowDetailsKey, true);
+            set => EditorPrefs.SetBool(DrawProjectWindowDetailsKey, value);
+        }
+
+        [MenuItem(MenuItem)]
         public static void ToggleProjectWindowDetails()
         {
-            var enabled = !EditorPrefs.GetBool(DrawProjectWindowDetailsKey, true);
-            EditorPrefs.SetBool(DrawProjectWindowDetailsKey, enabled);
+            var enabled = !DrawDetailsEnabled;
+            DrawDetailsEnabled = enabled;
+            Menu.SetChecked(MenuItem, enabled);
+            
+            EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
             if (enabled)
             {
-                EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
                 EditorApplication.projectWindowItemOnGUI += DrawProjectWindowDetails;
-            }
-            else
-            {
-                EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
             }
         }
 
+
         static ProjectWindowDetailsDrawer()
         {
+            var enabled = DrawDetailsEnabled;
+            Menu.SetChecked(MenuItem, enabled);
+
             Details.Sort((detail1, detail2) => detail1.Order.CompareTo(detail2.Order));
-            if (EditorPrefs.GetBool(DrawProjectWindowDetailsKey, true))
+            if (enabled)
             {
                 EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
                 EditorApplication.projectWindowItemOnGUI += DrawProjectWindowDetails;
@@ -52,7 +61,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
         static void DrawProjectWindowDetails(string guid, Rect rect)
         {
             if (Application.isPlaying || IsProjectListAsset(rect)) return;
-            if (!EditorPrefs.GetBool(DrawProjectWindowDetailsKey, true)) return;
+            if (!DrawDetailsEnabled) return;
 
             var isSelected = Array.IndexOf(Selection.assetGUIDs, guid) >= 0;
 
@@ -113,14 +122,17 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
                 rect.x -= detail.ColumnWidth + SpaceBetweenColumns;
                 var detailContent = detail.GetLabel(guid, assetPath, asset, isValidFolder);
                 GUI.contentColor = detailContent.DetailColor;
-                GUI.Label(rect, new GUIContent(detailContent.DetailText, detailContent.DetailTooltip), GetStyle(detail.Alignment));
+                GUI.Label(rect, new GUIContent(detailContent.DetailText, detailContent.DetailTooltip),
+                    GetStyle(detail.Alignment));
             }
 
             GUI.contentColor = contentColor;
         }
 
         static GUIStyle GetStyle(TextAlignment alignment)
-            => alignment == TextAlignment.Left ? EditorStyles.boldLabel : new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleRight };
+            => alignment == TextAlignment.Left
+                ? EditorStyles.boldLabel
+                : new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleRight };
 
         static void ShowContextMenu(Rect rect)
         {
