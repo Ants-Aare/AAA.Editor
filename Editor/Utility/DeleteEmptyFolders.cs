@@ -7,7 +7,7 @@ namespace AAA.Editor.Editor.Plugins.AAA.Editor.Editor.Utility
 {
     public static class DeleteEmptyFoldersUtility
     {
-        [MenuItem("AAA/Utility/Delete empty folders", false, 14)]
+        [MenuItem("AAA/Find/Delete empty folders", false, 80)]
         public static void DeleteEmptyFolders()
         {
             var directoryInfos = new DirectoryInfo(Application.dataPath)
