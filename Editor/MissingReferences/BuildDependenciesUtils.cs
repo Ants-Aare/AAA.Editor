@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using AAA.Utility.General;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,7 +26,9 @@ namespace Plugins.AAA.Editor.Editor.MissingReferences
             var deepDependencies = new Dictionary<string, string[]>();
             while (open.Count > 0)
             {
-                var next = open.Pop();
+                var next = open[^1];
+                open.RemoveAt(open.Count - 1);
+                
                 closed.Add(next);
 
                 FindDependantsOf(path, next, tree, open, closed, shallowDependencies, deepDependencies);
