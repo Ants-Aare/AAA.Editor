@@ -24,7 +24,7 @@ namespace Plugins.AAA.Editor.Editor.Toolbar
             var color = GUI.backgroundColor;
             GUI.backgroundColor = Color.cyan;
             if (GUILayout.Button(_preferencesContent, ExtendedToolbarHandler.DefaultButtonStyle))
-                EditorApplication.ExecuteMenuItem("Unity/Preferences...");
+                SettingsService.OpenUserPreferences();        
         
             GUI.backgroundColor = color;
         }
