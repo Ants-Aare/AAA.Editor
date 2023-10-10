@@ -16,7 +16,6 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
         public override void OnClicked(string guid)
         {
             GUIUtility.systemCopyBuffer = guid;
-            Event.current.Use();
             Debug.Log("Copied GUID to Clipboard! guid: " + guid);
         }
     }

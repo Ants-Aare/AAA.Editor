@@ -22,7 +22,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
 
         public override DetailContent GetLabel(string guid, string assetPath, Object asset, bool isFolder)
         {
-            if (isFolder || asset.name == "Assets") return DetailContent.Empty;
+            if (isFolder || asset is {name:"Assets"}) return DetailContent.Empty;
 
             return asset switch
             {

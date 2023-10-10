@@ -17,10 +17,12 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
         }
 
         public override DetailContent GetLabel(string guid, string assetPath, Object asset, bool isFolder)
-            =>  new DetailContent(isFolder
-                ? "Folder"
-                : asset?.GetType()?.Name
-                , "Open Source Code");
+            => new DetailContent(isFolder
+                    ? "Folder"
+                    : asset != null
+                        ? asset.GetType()?.Name
+                        : null
+                , isFolder ? "Folder" : "Open Source Code");
 
         public override void OnClicked(string guid)
         {

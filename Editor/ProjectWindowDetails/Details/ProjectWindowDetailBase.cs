@@ -1,9 +1,11 @@
+using System;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
 {
-    public abstract class ProjectWindowDetailBase
+    public abstract class ProjectWindowDetailBase : IComparable<ProjectWindowDetailBase>
     {
         const string ShowPrefsKey = "ProjectWindowDetails.Show.";
         public int ColumnWidth = 100;
@@ -23,6 +25,13 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
 
         public virtual void OnClicked(string guid)
         {
+        }
+
+        public int CompareTo(ProjectWindowDetailBase other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            return Order.CompareTo(other.Order);
         }
     }
 }

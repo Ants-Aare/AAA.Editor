@@ -5,6 +5,7 @@ using System.Reflection;
 using Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
 {
@@ -18,11 +19,11 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
 
         static bool HasClicked => Event.current.type == EventType.MouseDown && Event.current.button == 0;
 
-        static readonly List<ProjectWindowDetailBase> Details = Assembly.GetExecutingAssembly()
+        static readonly ProjectWindowDetailBase[] Details = Assembly.GetExecutingAssembly()
             .GetTypes()
             .Where(type => type.BaseType == typeof(ProjectWindowDetailBase))
             .Select(type => (ProjectWindowDetailBase)Activator.CreateInstance(type))
-            .ToList();
+            .ToArray();
 
         static bool DrawDetailsEnabled
         {
@@ -37,10 +38,14 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
             DrawDetailsEnabled = enabled;
             Menu.SetChecked(MenuItem, enabled);
             
-            EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
             if (enabled)
             {
+                EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
                 EditorApplication.projectWindowItemOnGUI += DrawProjectWindowDetails;
+            }
+            else
+            {
+                EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
             }
         }
 
@@ -50,7 +55,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
             var enabled = DrawDetailsEnabled;
             Menu.SetChecked(MenuItem, enabled);
 
-            Details.Sort((detail1, detail2) => detail1.Order.CompareTo(detail2.Order));
+            Array.Sort(Details);
             if (enabled)
             {
                 EditorApplication.projectWindowItemOnGUI -= DrawProjectWindowDetails;
@@ -89,7 +94,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
             }
             else
             {
-                for (var i = Details.Count - 1; i >= 0; i--)
+                for (var i = Details.Length - 1; i >= 0; i--)
                 {
                     var detail = Details[i];
                     if (!detail.Visible)
@@ -112,7 +117,7 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
             var isValidFolder = AssetDatabase.IsValidFolder(assetPath);
 
             var contentColor = GUI.contentColor;
-            for (var i = Details.Count - 1; i >= 0; i--)
+            for (var i = Details.Length - 1; i >= 0; i--)
             {
                 var detail = Details[i];
                 if (!detail.Visible)
@@ -122,17 +127,14 @@ namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
                 rect.x -= detail.ColumnWidth + SpaceBetweenColumns;
                 var detailContent = detail.GetLabel(guid, assetPath, asset, isValidFolder);
                 GUI.contentColor = detailContent.DetailColor;
-                GUI.Label(rect, new GUIContent(detailContent.DetailText, detailContent.DetailTooltip),
-                    GetStyle(detail.Alignment));
+                GUI.Label(rect, new GUIContent(detailContent.DetailText, detailContent.DetailTooltip), GetStyle(detail.Alignment));
             }
 
             GUI.contentColor = contentColor;
         }
 
         static GUIStyle GetStyle(TextAlignment alignment)
-            => alignment == TextAlignment.Left
-                ? EditorStyles.boldLabel
-                : new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleRight };
+            => alignment == TextAlignment.Left ? EditorStyles.boldLabel : new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleRight };
 
         static void ShowContextMenu(Rect rect)
         {
