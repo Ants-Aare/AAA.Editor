@@ -25,8 +25,11 @@ namespace Plugins.AAA.Editor.Editor.Toolbar
             var color = GUI.backgroundColor;
             GUI.backgroundColor = Color.blue;
             if (GUILayout.Button(_preferencesContent, ExtendedToolbarHandler.DefaultButtonStyle))
+            {
                 EditorApplication.ExecuteMenuItem("Window/Analysis/Frame Debugger");
-        
+                EditorApplication.isPaused = true;
+            }
+
             GUI.backgroundColor = color;
         }
     }

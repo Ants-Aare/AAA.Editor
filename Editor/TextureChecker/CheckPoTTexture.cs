@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Plugins.AAA.Editor.Editor.Extensions;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace UnityEditor
+namespace AAA.Editor
 {
     /// <summary>
     /// An editor tool that locates all the textures in the project that are not power of two(PoT) and also not in an atlas.
