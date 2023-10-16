@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
+namespace AAA.Editor.Editor.ProjectWindowDetails.Details
 {
     public class PathDetail : ProjectWindowDetailBase
     {

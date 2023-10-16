@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.Extensions
+namespace AAA.Editor.Editor.Extensions
 {
     public static class RectExtension
     {

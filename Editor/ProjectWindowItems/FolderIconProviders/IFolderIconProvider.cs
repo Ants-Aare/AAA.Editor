@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowItems.FolderIconProviders
+namespace AAA.Editor.Editor.ProjectWindowItems.FolderIconProviders
 {
     public interface IFolderIconProvider
     {

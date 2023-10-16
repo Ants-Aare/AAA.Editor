@@ -7,7 +7,7 @@ namespace AAA.Editor.Editor.Resolutions
     {
         public static void DrawResolutionSelection()
         {
-            var gameResolutionInfos = GameResolutionUtility.GetGameResolutionInfos();
+            var gameResolutionInfos = GameResolutionUtility.GameResolutionInfos;
             var splitList = gameResolutionInfos.GroupBy(x => x.Platform);
             var labelWidth = EditorGUIUtility.labelWidth;
 

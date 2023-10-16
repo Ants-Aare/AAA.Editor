@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Plugins.AAA.Editor.Editor.Extensions
+namespace AAA.Editor.Editor.Extensions
 {
     public static class AsyncExtension
     {

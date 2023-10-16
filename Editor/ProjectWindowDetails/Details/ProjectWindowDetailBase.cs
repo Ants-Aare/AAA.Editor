@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
+namespace AAA.Editor.Editor.ProjectWindowDetails.Details
 {
     public abstract class ProjectWindowDetailBase : IComparable<ProjectWindowDetailBase>
     {

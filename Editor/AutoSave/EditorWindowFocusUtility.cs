@@ -1,7 +1,7 @@
 using System;
 using UnityEditor;
 
-namespace AAA.Editor
+namespace AAA.Editor.Editor.AutoSave
 {
     public static class EditorWindowFocusUtility
     {

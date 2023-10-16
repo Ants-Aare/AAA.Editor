@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
+namespace AAA.Editor.Editor.ProjectWindowDetails.Details
 {
     public class FileSizeDetail : ProjectWindowDetailBase
     {

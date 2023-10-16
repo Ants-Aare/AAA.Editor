@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Plugins.AAA.Editor.Editor.Extensions;
+using AAA.Editor.Editor.Extensions;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowItems.FolderIconProviders
+namespace AAA.Editor.Editor.ProjectWindowItems.FolderIconProviders
 {
     public class UnityFolderIconProvider : IFolderIconProvider
     {

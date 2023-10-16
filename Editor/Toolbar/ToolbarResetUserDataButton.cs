@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.Toolbar
+namespace AAA.Editor.Editor.Toolbar
 {
     public class ToolbarResetUserDataButton : IToolbarContentGuiLeft
     {

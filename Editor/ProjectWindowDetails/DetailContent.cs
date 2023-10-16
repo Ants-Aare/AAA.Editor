@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
+namespace AAA.Editor.Editor.ProjectWindowDetails
 {
     public struct DetailContent
     {

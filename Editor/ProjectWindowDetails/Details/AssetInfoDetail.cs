@@ -1,12 +1,12 @@
 using System.IO;
 using System.Text;
-using Plugins.AAA.Editor.Editor.ProjectWindowDetails;
+using AAA.Editor.Editor.ProjectWindowDetails;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
 using static System.String;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
+namespace AAA.Editor.Editor.ProjectWindowDetails.Details
 {
     public class AssetInfoDetail : ProjectWindowDetailBase
     {

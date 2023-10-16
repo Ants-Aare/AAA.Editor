@@ -2,7 +2,7 @@ using System.IO;
 using static System.String;
 using Object = UnityEngine.Object;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details
+namespace AAA.Editor.Editor.ProjectWindowDetails.Details
 {
     public class FileSuffixDetail : ProjectWindowDetailBase
     {

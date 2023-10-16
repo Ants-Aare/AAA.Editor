@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.MissingReferences
+namespace AAA.Editor.Editor.MissingReferences
 {
     public static class BuildDependenciesUtils
     {

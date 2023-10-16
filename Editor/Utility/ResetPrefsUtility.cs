@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AAA.Editor.Editor.Plugins.AAA.Editor.Editor.Utility
+namespace AAA.Editor.Editor.Utility
 {
     public class ResetPrefsUtility
     {

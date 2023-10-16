@@ -1,9 +1,9 @@
 using System;
-using Plugins.AAA.Editor.Editor.ProjectWindowItems.FolderIconProviders;
+using AAA.Editor.Editor.ProjectWindowItems.FolderIconProviders;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowItems
+namespace AAA.Editor.Editor.ProjectWindowItems
 {
     [InitializeOnLoad]
     public class FolderIconDrawer

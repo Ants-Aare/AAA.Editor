@@ -1,4 +1,4 @@
-using Plugins.AAA.Editor.Editor.Extensions;
+using AAA.Editor.Editor.Extensions;
 using UnityEditor;
 using UnityEngine;
 

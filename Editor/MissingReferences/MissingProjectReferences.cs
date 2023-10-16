@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
 
-namespace Plugins.AAA.Editor.Editor.MissingReferences
+namespace AAA.Editor.Editor.MissingReferences
 {
     /// <summary>
     /// Scans the project for serialized references to missing (deleted) assets and displays the results in an EditorWindow

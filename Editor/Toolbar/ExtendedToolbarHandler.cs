@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Plugins.AAA.Editor.Editor.Extensions;
+using AAA.Editor.Editor.Extensions;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbarExtender;
 
-namespace Plugins.AAA.Editor.Editor.Toolbar
+namespace AAA.Editor.Editor.Toolbar
 {
     [InitializeOnLoad]
     public class ExtendedToolbarHandler

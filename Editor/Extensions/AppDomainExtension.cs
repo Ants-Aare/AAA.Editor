@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Plugins.AAA.Editor.Editor.Extensions
+namespace AAA.Editor.Editor.Extensions
 {
     public static class AppDomainExtension
     {

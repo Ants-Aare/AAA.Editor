@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AAA.Editor
+namespace AAA.Editor.Editor.Utility
 {
     /// <summary>
     /// Unity Editor tool to find an Asset with a specific GUID.

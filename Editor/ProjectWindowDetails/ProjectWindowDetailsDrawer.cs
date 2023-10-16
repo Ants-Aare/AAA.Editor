@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Plugins.AAA.Editor.Editor.ProjectWindowDetails.Details;
+using AAA.Editor.Editor.ProjectWindowDetails.Details;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Plugins.AAA.Editor.Editor.ProjectWindowDetails
+namespace AAA.Editor.Editor.ProjectWindowDetails
 {
     [InitializeOnLoad]
     public static class ProjectWindowDetailsDrawer

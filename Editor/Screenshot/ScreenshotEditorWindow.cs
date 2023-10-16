@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Plugins.AAA.Editor.Editor.Extensions;
+using AAA.Editor.Editor.Extensions;
 using UnityEditor;
 using UnityEngine;
 

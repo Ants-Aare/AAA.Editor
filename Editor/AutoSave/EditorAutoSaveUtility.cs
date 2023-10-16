@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace AAA.Editor
+namespace AAA.Editor.Editor.AutoSave
 {
     [InitializeOnLoad]
     public class EditorAutoSaveUtility

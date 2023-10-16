@@ -3,7 +3,7 @@ using AAA.Editor.Runtime.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace AAA.Editor.Plugins.AAA.Editor.Editor.Attributes
+namespace AAA.Editor.Editor.Attributes
 {
     [CustomPropertyDrawer(typeof(SelfAttribute))]
     public class SelfPropertyDrawer : PropertyDrawer
