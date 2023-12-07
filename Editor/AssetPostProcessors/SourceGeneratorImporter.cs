@@ -18,6 +18,8 @@ namespace AAA.Editor.AssetPostProcessors
                     when assetImporter.importSettingsMissing && IsSourceGeneratorPath(assetPath):
                     pluginImporter.SetCompatibleWithAnyPlatform(false);
                     assetImporter.EnsureLabel("RoslynAnalyzer");
+                    assetImporter.EnsureLabel("SourceGenerator");
+                    assetImporter.EnsureLabel("RunOnlyOnAssembliesWithReference");
                     pluginImporter.SaveAndReimport();
                     break;
                 default:
