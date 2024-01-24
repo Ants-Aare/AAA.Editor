@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AAA.Editor.Editor.Attributes
 {
-    [CustomPropertyDrawer(typeof(SelfOrChildAttribute))]
+    [CustomPropertyDrawer(typeof(FromSelfOrChildAttribute))]
     public class SelfOrChildPropertyDrawer : PropertyDrawer
     {
         Action<Rect, SerializedProperty, GUIContent> _onGui;

@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace AAA.Editor.Editor.Attributes
 {
-    [CustomPropertyDrawer(typeof(FromSelfAttribute))]
-    public class SelfPropertyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(FromParentAttribute))]
+    public class FromParentPropertyDrawer : PropertyDrawer
     {
         Action<Rect, SerializedProperty, GUIContent> _onGui;
 
@@ -48,7 +48,8 @@ namespace AAA.Editor.Editor.Attributes
             if (property.objectReferenceValue == null)
             {
                 var monoBehaviour = (Component)property.serializedObject.targetObject;
-                property.objectReferenceValue = monoBehaviour.GetComponent(fieldInfo.FieldType);
+                if(monoBehaviour.transform.parent != null)
+                    property.objectReferenceValue = monoBehaviour.GetComponentInParent(fieldInfo.FieldType);
             }
 
             EditorGUI.PropertyField(rect, property, label);
