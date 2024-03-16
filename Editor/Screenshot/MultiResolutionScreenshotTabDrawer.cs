@@ -21,12 +21,12 @@ namespace AAA.Editor.Editor.Screenshot
             }
 
             EditorGUILayout.Space(20);
-            if (EditorApplication.isPlaying)
-                EditorGUI.BeginDisabledGroup(true);
-            if (GUILayout.Button(new GUIContent("Take Gameplay Screenshots", "Enter PlayMode and Take Multiresolution Screenshots of the Main Menu and the Target Level"), GUILayout.MinHeight(40)))
-                ScreenShotService.TakeGameplayScreenShots();
-            if (EditorApplication.isPlaying)
-                EditorGUI.EndDisabledGroup();
+            // if (EditorApplication.isPlaying)
+            //     EditorGUI.BeginDisabledGroup(true);
+            // if (GUILayout.Button(new GUIContent("Take Gameplay Screenshots", "Enter PlayMode and Take Multiresolution Screenshots of the Main Menu and the Target Level"), GUILayout.MinHeight(40)))
+                // ScreenShotService.TakeGameplayScreenShots();
+            // if (EditorApplication.isPlaying)
+            //     EditorGUI.EndDisabledGroup();
 
             EditorGUILayout.Space(20);
 

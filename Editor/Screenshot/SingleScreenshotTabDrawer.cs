@@ -28,8 +28,16 @@ namespace AAA.Editor.Editor.Screenshot
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUI.BeginChangeCheck();
-                var width = EditorGUILayout.IntField("Width", _overrideTargetResolution.x);
-                var height = EditorGUILayout.IntField("Height", _overrideTargetResolution.y);
+                var overrideX = EditorPrefs.GetInt(ScreenShotSizeOverrideX, 1080);
+                var overrideY = EditorPrefs.GetInt(ScreenShotSizeOverrideY, 1920);
+                var width = EditorGUILayout.IntField("Width", overrideX);
+                var height = EditorGUILayout.IntField("Height", overrideY);
+                
+                if(width != overrideX)
+                    EditorPrefs.SetInt(ScreenShotSizeOverrideX, width);
+                if(height != overrideY)
+                    EditorPrefs.SetInt(ScreenShotSizeOverrideY, height);
+                
                 EditorGUI.EndChangeCheck();
                 _overrideTargetResolution = new Vector2Int(width, height);
                 EditorGUILayout.EndHorizontal();
@@ -44,7 +52,7 @@ namespace AAA.Editor.Editor.Screenshot
             {
                 var copyResult = EditorPrefs.GetBool(ScreenShotService.CopyScreenShotToClipboardKey);
 
-                if (_isOverrideResolution)
+                if (!_isOverrideResolution)
                 {
                     ScreenShotService.TakeScreenShot("ScreenShot", copyResult, _isTransparentScreenShot)
                         .FireAndForget();
@@ -62,5 +70,8 @@ namespace AAA.Editor.Editor.Screenshot
             DrawFooter();
             _isTransparentScreenShot = EditorApplication.isPlaying && EditorGUILayout.Toggle("Transparent", _isTransparentScreenShot);
         }
+
+        private const string ScreenShotSizeOverrideX = "ScreenShotSizeOverrideX";
+        private const string ScreenShotSizeOverrideY = "ScreenShotSizeOverrideY";
     }
 }

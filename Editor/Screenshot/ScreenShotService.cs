@@ -132,7 +132,9 @@ namespace AAA.Editor.Editor.Screenshot
         }
 
         public static Task TakeScreenShot(string file, bool copyResultToClipBoard, bool isTransparent = false)
-            => CreateScreenshotAndSaveToFile(GetFileName(new Vector2Int(Screen.width, Screen.height), file), copyResultToClipBoard, isTransparent);
+        {
+            return CreateScreenshotAndSaveToFile(GetFileName(new Vector2Int(Screen.width, Screen.height), file), copyResultToClipBoard, isTransparent);
+        }
 
         public static async Task TakeScreenShotWithResolution(string file, Vector2Int resolution, bool copyResultToClipBoard, bool isTransparent = false)
         {
@@ -142,6 +144,7 @@ namespace AAA.Editor.Editor.Screenshot
             await CreateScreenshotAndSaveToFile(GetFileName(new Vector2Int(Screen.width, Screen.height), file),
                 copyResultToClipBoard, isTransparent);
 
+            await AsyncExtension.WaitForFrame();
             GameViewUtils.RemoveSize(GameViewUtils.GetSelectedIndex());
             GameViewUtils.SetSize(index);
         }
@@ -166,6 +169,7 @@ namespace AAA.Editor.Editor.Screenshot
             }
             else
             {
+                await AsyncExtension.WaitForFrame();
                 ScreenCapture.CaptureScreenshot(fileName);
             }
 
@@ -187,7 +191,7 @@ namespace AAA.Editor.Editor.Screenshot
             if (!EditorApplication.isPlaying)
                 return null;
 
-            var camera = Camera.allCameras.Last();
+            var camera = Camera.main;
             var resWidth = camera.pixelWidth;
             var resHeight = camera.pixelHeight;
 
