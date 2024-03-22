@@ -200,16 +200,16 @@ namespace AAA.Editor.Editor.Screenshot
             var renderTexture = GetRenderTexture(resWidth, resHeight);
             camera.SetProperties(new CameraProperties()
             {
-                ClearFlags = CameraClearFlags.Depth,
+                ClearFlags = CameraClearFlags.SolidColor,
                 BackgroundColor = Color.clear,
-                TargetTexture = renderTexture
+                TargetTexture = renderTexture,
             });
 
             camera.Render();
             RenderTexture.active = renderTexture;
 
             var screenShot = new Texture2D(resWidth, resHeight, TextureFormat.ARGB32, false);
-            screenShot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0);
+            screenShot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0, false);
             screenShot.Apply();
 
             camera.SetProperties(oldProperties);
