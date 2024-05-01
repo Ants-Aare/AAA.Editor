@@ -15,7 +15,7 @@ namespace AAA.Editor.Editor.Toolbar
         public void Initialize()
         {
             // Texture names found here: https://github.com/halak/unity-editor-icons
-            var icon = EditorGUIUtility.IconContent(@"winbtn_win_restore_a").image;
+            var icon = EditorGUIUtility.IconContent(@"d_UnityEditor.ConsoleWindow@2x").image;
             _preferencesContent = new GUIContent(null, icon, "Build Settings");
         }
 
